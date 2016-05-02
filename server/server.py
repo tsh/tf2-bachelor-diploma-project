@@ -1,26 +1,19 @@
-import asyncio
-import json
-import random
+import socket
 
-import websockets
 
-game_map = [[random.randint(0, 2) for _ in range(10)] for _ in range(10)]
+TCP_IP = '127.0.0.1'
+TCP_PORT = 6789
+BUFFER_SIZE = 20  # Normally 1024, but we want fast response
 
-@asyncio.coroutine
-def hello(websocket, path):
-    while True:
-        message = yield from websocket.recv()
-        print(message)
-        if message is None:
-            # connection closed
-            print("closed")
-            break
-        yield from websocket.send(json.dumps({'type': 'echo',
-                                              'message': message}))
-        yield from websocket.send(json.dumps({'type': 'map',
-                                              'map': game_map}))
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind((TCP_IP, TCP_PORT))
+s.listen(1)
 
-start_server = websockets.serve(hello, 'localhost', 8765)
-
-asyncio.get_event_loop().run_until_complete(start_server)
-asyncio.get_event_loop().run_forever()
+conn, addr = s.accept()
+print ('Connection address:', addr)
+while 1:
+    data = conn.recv(BUFFER_SIZE)
+    if not data: break
+    print ("received data:", data)
+    conn.send(data)  # echo
+conn.close()

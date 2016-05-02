@@ -39,6 +39,12 @@ public class MainMenuScreen implements Screen {
     Actor root;
 
     public MainMenuScreen(final Tf2Client gam) {
+        try {
+            TCPConnection tcp = new TCPConnection();
+        } catch (Exception e){
+            {System.out.println("Connection error: "+e);}
+        }
+
         game = gam;
 
         camera = new OrthographicCamera();
