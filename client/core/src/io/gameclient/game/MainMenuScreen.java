@@ -82,6 +82,7 @@ public class MainMenuScreen implements Screen {
         stage.addActor(table);
         // MENU
         String startGameText = "";
+        String settingsText = "Settings";
         String quitGameText = "";
 
         switch (game.prefs.getInteger("lang")){
@@ -99,8 +100,11 @@ public class MainMenuScreen implements Screen {
                 break;
         }
         final TextButton button = new TextButton(startGameText, skin);
+        final TextButton settingsButton = new TextButton(settingsText, skin);
         final TextButton exitButton = new TextButton(quitGameText, skin);
         table.add(button);
+        table.row();
+        table.add(settingsButton);
         table.row();
         table.add(exitButton).padTop(10);
         table.left().pad(20);
