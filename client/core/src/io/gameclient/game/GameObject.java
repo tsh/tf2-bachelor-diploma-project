@@ -15,9 +15,12 @@ public abstract class GameObject {
     private Texture highligtAttackTexture;
 
     public GameObject(){
-        this.selectionTexture = new Texture(Gdx.files.internal("general/selector.png"));
-        this.hilightMoveTexture = new Texture(Gdx.files.internal("general/square_transperent16.png"));
-        this.highligtAttackTexture = new Texture(Gdx.files.internal("general/square_transperentRED16.png"));
+        this.selectionTexture =
+                new Texture(Gdx.files.internal("general/selector.png"));
+        this.hilightMoveTexture =
+                new Texture(Gdx.files.internal("general/square_transperent16.png"));
+        this.highligtAttackTexture =
+                new Texture(Gdx.files.internal("general/square_transperentRED16.png"));
     }
 
     public void render(SpriteBatch batch, float x, float y){
